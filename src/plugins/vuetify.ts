@@ -29,7 +29,10 @@ export default createVuetify({
           'warning-on': '#FCF7E4',
           'error-on': '#EFDFDF',
           'surface-on': '#373A3C',
-          'surface-container-on': '#55595C'
+          'surface-container-on': '#55595C',
+          'surface-container-highest': '#818A91',
+          'surface-container-low': '#DDDDDD',
+          outline: '#777777'
         }
       }
     }
