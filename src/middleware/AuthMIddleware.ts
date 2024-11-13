@@ -1,16 +1,14 @@
-import { Cookies } from '@/types/Cookies'
-import { useCookies } from '@vueuse/integrations/useCookies'
+import { useAuthStore } from '@/stores/Auth'
 
-export default function authMiddleware(
+export default async function authMiddleware(
   to: { path: string },
-  from: any,
+  _: any,
   next: (path?: string) => void
 ) {
-  const cookie = useCookies()
-  const authCookie = cookie.get(Cookies.AUTH)
+  const authStore = useAuthStore()
 
-  if (to.path.includes('auth') && authCookie) return next('/')
-  else if (!authCookie && !to.path.includes('auth')) return next('/auth/login')
+  if (to.path.includes('auth') && authStore.account) return next('/')
+  else if (!authStore.account && !to.path.includes('auth')) return next('/auth/login')
 
   return next()
 }

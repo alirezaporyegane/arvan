@@ -1,10 +1,24 @@
 <template>
   <v-card color="silver" variant="flat" class="pa-5" max-width="450" width="100%">
     <h1 class="text-warm-grey text-xl-h3 text-uppercase mt-9 mb-7 text-center">
-      {{ $t('users.login') }}
+      {{ $t('users.register') }}
     </h1>
 
     <v-form v-model="form" class="mb-4" @submit.prevent="onSubmit">
+      <div class="mb-3">
+        <label for="email" class="ms-2">{{ $t('users.username') }}</label>
+
+        <v-text-field
+          variant="outlined"
+          base-color="surface-container-low"
+          bg-color="white"
+          density="compact"
+          clearable
+          :rules="[rules.required]"
+          v-model="model.username"
+        />
+      </div>
+
       <div class="mb-3">
         <label for="email" class="ms-2">{{ $t('users.email') }}</label>
 
@@ -34,18 +48,18 @@
       </div>
 
       <v-btn color="primary" block type="submit">
-        {{ $t('users.login') }}
+        {{ $t('users.register') }}
       </v-btn>
     </v-form>
 
     <p class="text-charcoal-grey">
-      {{ $t('users.donTHaveAccount') }}
+      {{ $t('users.alreadyRegistered') }}
 
       <router-link
-        to="/auth/register"
+        to="/auth/login"
         class="text-decoration-none text-charcoal-grey font-weight-bold ms-1"
       >
-        {{ $t('users.registerNow') }}
+        {{ $t('users.login') }}
       </router-link>
     </p>
   </v-card>
@@ -57,23 +71,24 @@ import { useRouter } from 'vue-router'
 import { rules } from '@/utils/rules'
 import { usersApi } from '@/services/api'
 import { useCookies } from '@/composables/useCookie'
-import { Cookies } from '@/types/Cookies'
 import { useAuthStore } from '@/stores/Auth'
-import type { LoginBody } from '@/types/Users'
+import { Cookies } from '@/types/Cookies'
+import type { RegisterBody } from '@/types/Users'
 
 const router = useRouter()
 const authStore = useAuthStore()
 const form = ref<boolean>(false)
-const model = ref<LoginBody['user']>({
+const model = ref<RegisterBody['user']>({
   email: null,
-  password: null
+  password: null,
+  username: null
 })
 
 async function onSubmit() {
   if (!form.value) return
 
   try {
-    const date = await usersApi.login({ user: { ...model.value } })
+    const date = await usersApi.register({ user: { ...model.value } })
 
     const cookie = useCookies()
     authStore.setAccount(date)
