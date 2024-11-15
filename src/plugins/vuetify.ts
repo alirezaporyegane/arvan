@@ -1,18 +1,17 @@
-/**
- * plugins/vuetify.ts
- *
- * Framework documentation: https://vuetifyjs.com`
- */
-
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
 // Composables
 import { createVuetify } from 'vuetify'
+import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
+import { useI18n } from 'vue-i18n'
+import i18n from '@/services/translate'
 
-// https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
+  defaults: {
+    VBtn: { class: 'text-none' }
+  },
   theme: {
     defaultTheme: 'light',
     themes: {
@@ -28,13 +27,17 @@ export default createVuetify({
           silver: '#ECEEEF',
           'warning-on': '#FCF7E4',
           'error-on': '#EFDFDF',
-          'surface-on': '#373A3C',
+          'charcoal-grey': '#373A3C',
           'surface-container-on': '#55595C',
           'surface-container-highest': '#818A91',
-          'surface-container-low': '#DDDDDD',
+          'surface-container-low': '#DDD',
           'warm-grey': '#777777'
         }
       }
     }
+  },
+  locale: {
+    locale: 'en',
+    adapter: createVueI18nAdapter({ i18n, useI18n })
   }
 })
