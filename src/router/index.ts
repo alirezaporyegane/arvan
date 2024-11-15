@@ -1,7 +1,10 @@
 import { createRouter, createWebHistory, RouteLocationNormalizedGeneric } from 'vue-router/auto'
 import translations from '@/services/translate/index'
 import authMiddleware from '@/middleware/AuthMIddleware'
+
+// Pages
 import Article from './Article'
+import NewArticle from './NewArticle'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,7 +12,7 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/layouts/DefaultLayout.vue'),
-      children: [Article]
+      children: [Article, NewArticle]
     },
     {
       path: '/auth',

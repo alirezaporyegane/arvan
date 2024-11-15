@@ -7,8 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Article: typeof import('./src/components/Article/index.vue')['default']
     HeaderCmp: typeof import('./src/components/layouts/HeaderCmp.vue')['default']
     Login: typeof import('./src/components/Auth/Login/index.vue')['default']
+    NavigationDrawer: typeof import('./src/components/layouts/NavigationDrawer.vue')['default']
     Register: typeof import('./src/components/Auth/Register/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
