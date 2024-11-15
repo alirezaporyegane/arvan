@@ -14,7 +14,7 @@ export default {
       component: () => import('@/views/Article/ArticlePage.vue')
     },
     {
-      path: 'edit/:id',
+      path: 'edit/:slug',
       name: 'edit-article',
       meta: {
         title: translations.global.t('title.editArticle')
