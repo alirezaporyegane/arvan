@@ -4,9 +4,10 @@ import { stringify } from 'qs'
 import { useRoute, useRouter } from 'vue-router'
 import { ErrorException } from './types'
 import type { ErrorExceptions, RequestOption } from './types'
+import { errorMessage } from '@/utils/snackbar'
 
 const statusConfig = {
-  loginRedirect: [406, 407, 401, 403],
+  loginRedirect: [406, 407, 401],
   logout: [406, 407, 401, 403, 425, 502],
   failed: [500, 501, 502, 503, 504]
 }
@@ -20,9 +21,8 @@ export async function sendRequest<T>(url: string, options: RequestOption): Promi
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) throw await errorHandler(err as AxiosError<ErrorExceptions, any>)
     else {
-      const error = err as Error
-
-      // useSnackbar().show(error.message)
+      const error = err as string
+      errorMessage(error)
       throw [] as ErrorExceptions
     }
   }
@@ -79,6 +79,7 @@ async function errorHandler(err: AxiosError<ErrorExceptions>): Promise<any> {
 
     await router?.push(`/auth/login?returnUrl=${route.fullPath}`)
   } else if (statusConfig.failed.includes(error.status) && error.data[0]?.errorCode !== 4021)
+    console.log(err)
     if (!Array.isArray(error.data)) throw [error.data]
     else throw error.data
 }

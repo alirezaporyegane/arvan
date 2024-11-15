@@ -2,9 +2,9 @@
   <v-app class="bg-white">
     <HeaderCmp />
 
-    <v-row>
-      <v-col> sss </v-col>
-    </v-row>
+    <v-main>
+      <router-view/>
+    </v-main>
   </v-app>
 </template>
 

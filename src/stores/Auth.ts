@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { useCookies } from '@/composables/useCookie'
+import { Cookies } from '@/types/Cookies'
 import type { Auth } from '@/types/Users'
 
 export const useAuthStore = defineStore('auth', {
@@ -18,6 +20,9 @@ export const useAuthStore = defineStore('auth', {
     },
     logout() {
       this.account = null
+
+      const cookies = useCookies()
+      cookies.remove(Cookies.AUTH)
     }
   }
 })

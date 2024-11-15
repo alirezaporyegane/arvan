@@ -1,7 +1,5 @@
 <template>
-  <div v-if="authStore.account">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script lang="ts" setup>

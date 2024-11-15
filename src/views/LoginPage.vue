@@ -11,5 +11,6 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue'
 
+// Components
 const LoginComponent = defineAsyncComponent(() => import('@/components/Auth/Login/index.vue'))
 </script>

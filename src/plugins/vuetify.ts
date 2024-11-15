@@ -9,6 +9,9 @@ import { useI18n } from 'vue-i18n'
 import i18n from '@/services/translate'
 
 export default createVuetify({
+  defaults: {
+    VBtn: { class: 'text-none' }
+  },
   theme: {
     defaultTheme: 'light',
     themes: {

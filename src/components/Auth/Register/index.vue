@@ -13,7 +13,6 @@
           base-color="surface-container-low"
           bg-color="white"
           density="compact"
-          clearable
           :rules="[rules.required]"
           v-model="model.username"
         />
@@ -27,7 +26,6 @@
           base-color="surface-container-low"
           bg-color="white"
           density="compact"
-          clearable
           :rules="[rules.required, rules.email]"
           v-model="model.email"
         />
@@ -41,13 +39,12 @@
           base-color="surface-container-low"
           bg-color="white"
           density="compact"
-          clearable
           :rules="[rules.required, rules.min_value(model.password, 3)]"
           v-model="model.password"
         />
       </div>
 
-      <v-btn color="primary" block type="submit">
+      <v-btn color="primary" block :loading="progressing" type="submit">
         {{ $t('users.register') }}
       </v-btn>
     </v-form>
@@ -78,6 +75,7 @@ import type { RegisterBody } from '@/types/Users'
 const router = useRouter()
 const authStore = useAuthStore()
 const form = ref<boolean>(false)
+const progressing = ref<boolean>(false)
 const model = ref<RegisterBody['user']>({
   email: null,
   password: null,
@@ -88,6 +86,7 @@ async function onSubmit() {
   if (!form.value) return
 
   try {
+    progressing.value = true
     const date = await usersApi.register({ user: { ...model.value } })
 
     const cookie = useCookies()
@@ -96,6 +95,8 @@ async function onSubmit() {
     router.push('/article')
   } catch (err) {
     console.log(err)
+  } finally {
+    progressing.value = false 
   }
 }
 </script>

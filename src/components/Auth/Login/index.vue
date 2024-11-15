@@ -13,7 +13,6 @@
           base-color="surface-container-low"
           bg-color="white"
           density="compact"
-          clearable
           :rules="[rules.required, rules.email]"
           v-model="model.email"
         />
@@ -27,13 +26,12 @@
           base-color="surface-container-low"
           bg-color="white"
           density="compact"
-          clearable
           :rules="[rules.required, rules.min_value(model.password, 3)]"
           v-model="model.password"
         />
       </div>
 
-      <v-btn color="primary" block type="submit">
+      <v-btn color="primary" block :loading="progressing" type="submit">
         {{ $t('users.login') }}
       </v-btn>
     </v-form>
@@ -57,13 +55,17 @@ import { useRouter } from 'vue-router'
 import { rules } from '@/utils/rules'
 import { usersApi } from '@/services/api'
 import { useCookies } from '@/composables/useCookie'
-import { Cookies } from '@/types/Cookies'
 import { useAuthStore } from '@/stores/Auth'
+import { Cookies } from '@/types/Cookies'
+import { errorMessage } from '@/utils/snackbar'
+import { useI18n } from 'vue-i18n'
 import type { LoginBody } from '@/types/Users'
 
 const router = useRouter()
+const {t} = useI18n()
 const authStore = useAuthStore()
 const form = ref<boolean>(false)
+const progressing = ref<boolean>(false)
 const model = ref<LoginBody['user']>({
   email: null,
   password: null
@@ -73,6 +75,7 @@ async function onSubmit() {
   if (!form.value) return
 
   try {
+    progressing.value = true
     const date = await usersApi.login({ user: { ...model.value } })
 
     const cookie = useCookies()
@@ -80,7 +83,9 @@ async function onSubmit() {
     cookie.set(Cookies.AUTH, date)
     router.push('/article')
   } catch (err) {
-    console.log(err)
+    errorMessage(t('users.loginFailed'))
+  } finally {
+    progressing.value = false 
   }
 }
 </script>
