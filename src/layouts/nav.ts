@@ -12,8 +12,8 @@ const items: SidebarItem[] = [
   },
   {
     id: 2,
-    name: 'createArticle',
-    url: '/article/create'
+    name: 'newArticle',
+    url: '/new-article'
   }
 ]
 
