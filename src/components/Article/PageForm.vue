@@ -121,7 +121,7 @@ const form = ref<boolean>(true)
 const formValidate = computed(() => typeof form.value === 'boolean' && !form.value)
 
 function onSubmit() {
-  if (!formValidate.value) return
+  if (formValidate.value) return
 
   emits('submit')
   router.push('/')
