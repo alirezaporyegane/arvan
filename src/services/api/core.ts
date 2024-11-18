@@ -1,10 +1,11 @@
-import { useAuthStore } from '@/stores/Auth'
-import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
-import { stringify } from 'qs'
 import { useRoute, useRouter } from 'vue-router'
+import { stringify } from 'qs'
+import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
+import { useAuthStore } from '@/stores/Auth'
+import { errorMessage } from '@/utils/snackbar'
+import useAppConfig from '@/composables/useAppConfig'
 import { ErrorException } from './types'
 import type { ErrorExceptions, RequestOption } from './types'
-import { errorMessage } from '@/utils/snackbar'
 
 const statusConfig = {
   loginRedirect: [406, 407, 401],
@@ -30,7 +31,7 @@ export async function sendRequest<T>(url: string, options: RequestOption): Promi
 
 function requestConfig(endpointBaseUrl: string, options: RequestOption): AxiosRequestConfig {
   const restUrl = [endpointBaseUrl, options.action].filter((item) => !!item).join('/')
-  const baseURL = 'http://5.34.201.164:3000/api'
+  const baseURL = useAppConfig().apiUrl
   const axiosRequestConfig: AxiosRequestConfig = {
     baseURL,
     url: restUrl,
@@ -79,7 +80,6 @@ async function errorHandler(err: AxiosError<ErrorExceptions>): Promise<any> {
 
     await router?.push(`/auth/login?returnUrl=${route.fullPath}`)
   } else if (statusConfig.failed.includes(error.status) && error.data[0]?.errorCode !== 4021)
-    console.log(err)
-    if (!Array.isArray(error.data)) throw [error.data]
-    else throw error.data
+  if (!Array.isArray(error.data)) throw [error.data]
+  else throw error.data
 }

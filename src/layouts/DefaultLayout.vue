@@ -3,7 +3,9 @@
     <HeaderCmp />
 
     <v-main>
-      <router-view/>
+      <v-container class="px-md-5 my-5 py-md-10">
+        <router-view />
+      </v-container>
     </v-main>
   </v-app>
 </template>

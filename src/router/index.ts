@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory, RouteLocationNormalizedGeneric } from 'vue-router/auto'
 import translations from '@/services/translate/index'
 import authMiddleware from '@/middleware/AuthMIddleware'
+import useAppConfig from '@/composables/useAppConfig'
+
+// Views
 import Article from './Article'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(useAppConfig().baseUrl),
   routes: [
     {
       path: '/',
@@ -44,7 +47,7 @@ router.beforeEach((to, from, next) => {
 function setPageTitle(to: RouteLocationNormalizedGeneric) {
   const { title, description } = to.meta
   const titleParam = to.params.slug
-  const defaultTitle = translations.global.t('title.blog')
+  const defaultTitle = 'Arvan Challenge'
 
   if (title) document.title = `${title} - ${defaultTitle}`
   else if (titleParam) document.title = `${titleParam} - ${defaultTitle}`

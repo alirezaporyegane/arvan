@@ -10,9 +10,10 @@
 
         <v-text-field
           variant="outlined"
-          base-color="surface-container-low"
+          base-color="surface-container-highest"
           bg-color="white"
           density="compact"
+          class="mt-2"
           :rules="[rules.required, rules.email]"
           v-model="model.email"
         />
@@ -23,15 +24,16 @@
 
         <v-text-field
           variant="outlined"
-          base-color="surface-container-low"
+          base-color="surface-container-highest"
           bg-color="white"
           density="compact"
+          class="mt-2"
           :rules="[rules.required, rules.min_value(model.password, 3)]"
           v-model="model.password"
         />
       </div>
 
-      <v-btn color="primary" block :loading="progressing" type="submit">
+      <v-btn color="primary" block :loading="progressing" :disabled="!form" type="submit">
         {{ $t('users.login') }}
       </v-btn>
     </v-form>
@@ -52,9 +54,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCookies } from '@/composables/useCookie'
 import { rules } from '@/utils/rules'
 import { usersApi } from '@/services/api'
-import { useCookies } from '@/composables/useCookie'
 import { useAuthStore } from '@/stores/Auth'
 import { Cookies } from '@/types/Cookies'
 import { errorMessage } from '@/utils/snackbar'
@@ -62,7 +64,7 @@ import { useI18n } from 'vue-i18n'
 import type { LoginBody } from '@/types/Users'
 
 const router = useRouter()
-const {t} = useI18n()
+const { t } = useI18n()
 const authStore = useAuthStore()
 const form = ref<boolean>(false)
 const progressing = ref<boolean>(false)
@@ -81,11 +83,11 @@ async function onSubmit() {
     const cookie = useCookies()
     authStore.setAccount(date)
     cookie.set(Cookies.AUTH, date)
-    router.push('/article')
+    router.push('/')
   } catch (err) {
     errorMessage(t('users.loginFailed'))
   } finally {
-    progressing.value = false 
+    progressing.value = false
   }
 }
 </script>
