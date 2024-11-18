@@ -7,22 +7,14 @@ export default {
   children: [
     {
       path: '',
-      name: 'article',
+      name: 'ArticlePage',
       meta: {
         title: translations.global.t('title.allArticles')
       },
       component: () => import('@/views/Article/ArticlePage.vue')
     },
     {
-      path: 'create',
-      name: 'create',
-      meta: {
-        title: translations.global.t('title.newArticle')
-      },
-      component: () => import('@/views/Article/CreateArticlePage.vue')
-    },
-    {
-      path: 'edit/:id',
+      path: 'article/edit/:slug',
       name: 'edit-article',
       meta: {
         title: translations.global.t('title.editArticle')

@@ -5,6 +5,7 @@ import useAppConfig from '@/composables/useAppConfig'
 
 // Views
 import Article from './Article'
+import NewArticle from './NewArticle'
 
 const router = createRouter({
   history: createWebHistory(useAppConfig().baseUrl),
@@ -12,7 +13,7 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/layouts/DefaultLayout.vue'),
-      children: [Article]
+      children: [Article, NewArticle]
     },
     {
       path: '/auth',
