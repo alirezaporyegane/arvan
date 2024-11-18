@@ -1,6 +1,6 @@
 export default {
-  allArticles: 'All Articles',
   allArticle: 'All Article',
+  allArticles: 'All Articles',
   newArticle: 'New Article',
   editArticle: 'Edit article',
   blog: 'Blog',

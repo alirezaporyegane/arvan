@@ -7,7 +7,7 @@ export default async function authMiddleware(
 ) {
   const authStore = useAuthStore()
 
-  if (to.path.includes('auth') && authStore.account) return next('/')
+  if (to.path.includes('auth') && authStore.account) return next('/article')
   else if (!authStore.account && !to.path.includes('auth')) return next('/auth/login')
 
   return next()

@@ -1,13 +1,14 @@
 export default {
-  login: 'Login',
-  email: 'Email',
-  password: 'Password',
-  registerNow: 'Register now',
+  alreadyRegistered: 'Already Registered?',
+  author: 'Author',
   donTHaveAccount: 'Don’t have account?',
-  register: 'Register',
-  logout: 'Logout',
+  email: 'Email',
+  login: 'Login',
   loginFailed: 'Login Failed! User name and/or Password is invalid',
+  logout: 'Logout',
+  password: 'Password',
+  register: 'Register',
+  registerNow: 'Register now',
   username: 'Username',
-  welcomeUsername: 'Welcome {username}',
-  alreadyRegistered: 'Already Registered?'
+  welcomeUsername: 'Welcome {username}'
 }
