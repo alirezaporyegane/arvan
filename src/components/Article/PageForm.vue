@@ -10,7 +10,8 @@
 
     <v-form
       v-model="form"
-      validate-on="invalid-input eager"
+      fast-fail
+      validate-on="input eager"
       class="mb-4"
       @submit.prevent="onSubmit"
     >
@@ -68,7 +69,7 @@
             color="primary"
             type="submit"
             :loading="props.progressing"
-            :disabled="!formValidate"
+            :disabled="formValidate"
           >
             {{ $t('shared.submit') }}
           </v-btn>
@@ -85,7 +86,7 @@
         class="mt-6"
         type="submit"
         :loading="props.progressing"
-        :disabled="!formValidate"
+        :disabled="formValidate"
       >
         {{ $t('shared.submit') }}
       </v-btn>
@@ -117,7 +118,7 @@ const model = defineModel<Article>({ required: true })
 
 const form = ref<boolean>(true)
 
-const formValidate = computed(() => typeof form.value === 'boolean' && form.value)
+const formValidate = computed(() => typeof form.value === 'boolean' && !form.value)
 
 function onSubmit() {
   if (!formValidate.value) return
