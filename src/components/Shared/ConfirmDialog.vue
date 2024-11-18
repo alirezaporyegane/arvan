@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { useConfirmDialogStore } from '@/stores/confirmDialog'
+import { useConfirmDialogStore } from '@/stores/ConfirmDialog'
 
 const confirmDialogStore = useConfirmDialogStore()
 
