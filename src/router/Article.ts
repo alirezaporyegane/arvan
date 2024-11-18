@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import translations from '@/services/translate/index'
 
 export default {
-  path: '/article',
+  path: '/',
   name: 'Article',
   children: [
     {
@@ -14,7 +14,7 @@ export default {
       component: () => import('@/views/Article/ArticlePage.vue')
     },
     {
-      path: 'edit/:slug',
+      path: 'article/edit/:slug',
       name: 'edit-article',
       meta: {
         title: translations.global.t('title.editArticle')

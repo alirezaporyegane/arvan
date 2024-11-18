@@ -10,18 +10,32 @@ export const articleApi = {
     })
   },
 
-  getAllByPage(page: number) {
-    return sendRequest<ArticleResponse>(BASE_URL, {
+  getBySlug(slug: string) {
+    return sendRequest<{ article: Article }>(BASE_URL, {
       method: 'GET',
-      action: `page/${page}`
+      action: slug
     })
   },
 
-  update(body: Article, slug: string) {
+  create(body?: { article: Article }) {
+    return sendRequest<Article>(BASE_URL, {
+      method: 'POST',
+      body
+    })
+  },
+
+  update(slug: string, body?: { article: Article }) {
     return sendRequest<Article>(BASE_URL, {
       method: 'PUT',
       action: slug,
       body
+    })
+  },
+
+  remove(slug?: string) {
+    return sendRequest<string>(BASE_URL, {
+      method: 'DELETE',
+      action: slug
     })
   }
 }

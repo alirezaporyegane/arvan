@@ -8,7 +8,7 @@ const items: SidebarItem[] = [
   {
     id: 1,
     name: 'allArticle',
-    url: '/article'
+    url: '/'
   },
   {
     id: 2,
