@@ -42,7 +42,7 @@
           bg-color="white"
           density="compact"
           class="mt-2"
-          :rules="[rules.required, rules.min_value(model.password, 3)]"
+          :rules="[rules.required, rules.min_value(model.password, 6)]"
           v-model="model.password"
         />
       </div>
