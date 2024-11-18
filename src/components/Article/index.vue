@@ -84,7 +84,7 @@ import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { articleApi } from '@/services/api'
 import { successMessage } from '@/utils/snackbar'
-import { useConfirmDialogStore } from '@/stores/confirmDialog'
+import { useConfirmDialogStore } from '@/stores/ConfirmDialog'
 import { exceptionHandler } from '@/services/api/exception'
 import type { Article } from '@/types/Article'
 
