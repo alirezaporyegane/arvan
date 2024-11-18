@@ -1,4 +1,5 @@
 export default {
   arvanChallenge: 'Arvan Challenge',
-  post: 'Post'
+  post: 'Post',
+  title: 'Title'
 }

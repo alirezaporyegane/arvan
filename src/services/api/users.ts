@@ -1,5 +1,5 @@
-import type { Auth, LoginBody, RegisterBody } from '@/types/Users'
 import { sendRequest } from './core'
+import type { Auth, LoginBody, RegisterBody } from '@/types/Users'
 
 const BASE_URL = '/users'
 
